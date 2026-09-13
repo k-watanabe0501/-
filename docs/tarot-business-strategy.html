@@ -212,6 +212,40 @@ tr.total td.n{color:var(--gold)}
 
 :focus-visible{outline:2px solid var(--gold); outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+
+/* ---- leak funnel (real measured data) ---- */
+.leak{margin-top:26px; display:flex; flex-direction:column; gap:16px}
+.leakrow{display:flex; flex-direction:column; gap:6px}
+.leaklab{display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; font-size:14px}
+.leaklab b{font-family:var(--serif); font-size:16.5px; font-weight:600}
+.leaklab .q{font-family:var(--mono); font-size:14px; color:var(--gold); font-variant-numeric:tabular-nums}
+.leaklab .pc{font-family:var(--mono); font-size:11px; color:var(--ink-3); letter-spacing:.08em}
+.leakbar{height:26px; background:var(--surface-2); border:1px solid var(--rule); position:relative}
+.leakbar i{position:absolute; left:0; top:0; bottom:0; background:var(--gold); min-width:3px}
+.leakbar.lost i{background:var(--slate)}
+.leaknote{font-size:13.5px; color:var(--ink-3); padding-left:2px}
+
+/* ---- before / after ---- */
+.ba{margin-top:26px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule)}
+.ba > div{background:var(--surface); padding:22px}
+.ba .t{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3)}
+.ba.hi .t{color:var(--gold)}
+.ba dl{margin:14px 0 0; display:grid; grid-template-columns:1fr auto; gap:9px 14px; font-size:14.5px}
+.ba dt{color:var(--ink-2)}
+.ba dd{margin:0; font-family:var(--mono); font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap}
+.ba dd.big{font-weight:600; color:var(--gold); font-size:15.5px}
+.ba dl .sep{grid-column:1/-1; height:1px; background:var(--rule); margin-block:3px}
+
+/* ---- split roles ---- */
+.roles{margin-top:26px; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule)}
+.role{background:var(--surface); padding:24px}
+.role .who{font-family:var(--serif); font-size:18px; font-weight:600}
+.role .who small{display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); font-weight:400; margin-bottom:6px}
+.role ul{margin:14px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; font-size:14.5px; line-height:1.6}
+.role li{display:flex; gap:10px}
+.role li::before{content:"—"; color:var(--rule-2); flex:none}
+.role li b{font-weight:700}
+
 @media (max-width:560px){
   body{font-size:15.5px}
   .shead{flex-direction:column; gap:4px}
@@ -224,125 +258,212 @@ tr.total td.n{color:var(--gold)}
 
 <header class="masthead">
   <div class="kicker">
-    <span class="arcana">0 — XI</span>
-    <span class="eyebrow">事業設計書 / 2026.09.13</span>
+    <span class="arcana">0 — XIV</span>
+    <span class="eyebrow">事業設計書 v2 / 実績数値反映 / 2026.09.13</span>
   </div>
   <h1>深ひとみ<br>タロット事業 成長設計</h1>
-  <p class="sub">月商2万円から、12ヶ月で月50万円を安定させるまでの商品設計・動線・ペルソナ・実行計画。予算0〜1万円、オーガニック集客のみを前提に組んでいます。</p>
+  <p class="sub">開業1ヶ月目の実績を入れて組み直しました。結論は v1 から変わります — <strong>集客は機能しています。</strong>問題は、月200〜300件の接触がLINEに残っていない受け皿側だけです。</p>
   <div class="meta">
-    <span>稼働 — 週40時間以上</span>
-    <span>LINE友だち — 100人未満</span>
-    <span>予算 — 月0〜1万円</span>
-    <span>期限 — 12ヶ月</span>
+    <span>月商 — 28,000円</span>
+    <span>無料鑑定 — 月200〜300件</span>
+    <span>LINE — 70人</span>
+    <span>鑑定歴 — 2ヶ月</span>
+    <span>期限 — 12ヶ月で月50万</span>
   </div>
 </header>
 
 <div class="verdict">
-  <h2>診断：問題は商品ではなく、時間の行き先</h2>
-  <p>月160時間使って売上2万円。<strong>時間単価125円</strong>です。この数字が示しているのは商品の弱さではなく、時間の大半が「お金にならない場所」と「6割取られる場所」に流れているという事実です。だから最初の打ち手は新商品ではなく、<strong>時間の流出を止めること</strong>から始めます。</p>
+  <h2>診断：集客ではなく、受け皿の問題</h2>
+  <p>活動2ヶ月で月250件の無料鑑定が来ている。これは<strong>需要も露出も足りているという証拠</strong>です。一番作るのが難しい「人が集まる状態」はすでにできています。手を入れるのは仕組み側だけで済みます。</p>
+  <p style="margin-top:12px">250件と接触して、手元に残っているのが70人。<strong>180人が跡形もなく消えています。</strong>Threads のDMで無料鑑定が完結しているからです。</p>
   <div class="now">
     <div class="stat">
       <div class="l">現在の時間単価</div>
-      <div class="v">125<small>円 / 時</small></div>
+      <div class="v">175<small>円 / 時</small></div>
     </div>
     <div class="stat">
-      <div class="l">3ヶ月後</div>
-      <div class="v">625<small>円 / 時</small></div>
+      <div class="l">2ヶ月後</div>
+      <div class="v">632<small>円 / 時</small></div>
     </div>
     <div class="stat hero">
       <div class="l">12ヶ月後</div>
-      <div class="v">3,730<small>円 / 時</small></div>
+      <div class="v">3,115<small>円 / 時</small></div>
     </div>
   </div>
 </div>
 
 <nav class="toc" aria-label="目次">
   <ol>
-    <li><span class="n">0</span><a href="#s0">前提と、仮置きした未確認事項</a></li>
-    <li><span class="n">I</span><a href="#s1">3つのボトルネック</a></li>
-    <li><span class="n">II</span><a href="#s2">ジャンルとペルソナ</a></li>
-    <li><span class="n">III</span><a href="#s3">商品ラインナップ</a></li>
-    <li><span class="n">IV</span><a href="#s4">3フェーズの数値設計</a></li>
-    <li><span class="n">V</span><a href="#s5">動線と LINE ステップ配信</a></li>
-    <li><span class="n">VI</span><a href="#s6">最初の90日</a></li>
-    <li><span class="n">VII</span><a href="#s7">毎週金曜に記録する7つ</a></li>
-    <li><span class="n">VIII</span><a href="#s8">判断ルール</a></li>
-    <li><span class="n">IX</span><a href="#s9">リスクと対策</a></li>
-    <li><span class="n">X</span><a href="#s10">今週やる3つ</a></li>
+    <li><span class="n">0</span><a href="#s0">確定した現状</a></li>
+    <li><span class="n">I</span><a href="#s1">最大の発見：漏れている場所</a></li>
+    <li><span class="n">II</span><a href="#s2">3つのレバー</a></li>
+    <li><span class="n">III</span><a href="#s3">大アルカナ22枚を旗にする</a></li>
+    <li><span class="n">IV</span><a href="#s4">ジャンルとペルソナ</a></li>
+    <li><span class="n">V</span><a href="#s5">商品ラインナップ</a></li>
+    <li><span class="n">VI</span><a href="#s6">3フェーズの数値設計</a></li>
+    <li><span class="n">VII</span><a href="#s7">役割分担</a></li>
+    <li><span class="n">VIII</span><a href="#s8">動線とステップ配信</a></li>
+    <li><span class="n">IX</span><a href="#s9">開業と法人設立</a></li>
+    <li><span class="n">X</span><a href="#s10">最初の30日</a></li>
+    <li><span class="n">XI</span><a href="#s11">毎週金曜に記録する数字</a></li>
+    <li><span class="n">XII</span><a href="#s12">判断ルール</a></li>
+    <li><span class="n">XIII</span><a href="#s13">リスクと対策</a></li>
+    <li><span class="n">XIV</span><a href="#s14">今週やる3つ</a></li>
   </ol>
 </nav>
 
 <section id="s0">
-  <div class="shead"><span class="num">0</span><h2>前提と、仮置きした未確認事項</h2></div>
-  <p class="lede">確認できた4点をもとに設計しました。下の5点は仮置きしています。実際と違う場合は数字が変わるので教えてください。</p>
+  <div class="shead"><span class="num">0</span><h2>確定した現状</h2></div>
+  <p class="lede">開業1ヶ月目の実績。ここから逆算して全部を組み直しています。</p>
   <div class="wide tw">
     <table>
-      <caption>仮置きした前提</caption>
-      <thead><tr><th>項目</th><th>仮定した内容</th><th>ズレたときの影響</th></tr></thead>
+      <caption>実績・条件</caption>
+      <thead><tr><th>項目</th><th>実績</th></tr></thead>
       <tbody>
-        <tr><td>現在の平均単価</td><td>3,000〜5,000円</td><td>Phase 1 の必要件数が変わる</td></tr>
-        <tr><td>リピート率</td><td>10%未満</td><td>月額会員の到達スピードが変わる</td></tr>
-        <tr><td>得意ジャンル</td><td>恋愛・人間関係</td><td>ペルソナとジャンル設計の前提が変わる</td></tr>
-        <tr><td>顔出し・Zoom／電話</td><td>いずれも可</td><td>不可なら主力を動画・テキスト納品に組み替え</td></tr>
-        <tr><td>開業届</td><td>未提出</td><td>税務・経費計上の段取りが変わる</td></tr>
+        <tr><td>平均単価</td><td class="n">2,000円</td></tr>
+        <tr><td>月の有料件数</td><td class="n">14件（ココナラ9／LINE経由5）</td></tr>
+        <tr><td>月商</td><td class="n">約28,000円</td></tr>
+        <tr><td>LINE友だち</td><td class="n">70名</td></tr>
+        <tr><td>TikTokフォロワー</td><td class="n">290名</td></tr>
+        <tr><td>初回無料鑑定</td><td class="n">月200〜300件</td></tr>
+        <tr><td>リピート率</td><td class="n">2割弱</td></tr>
+        <tr><td>稼働</td><td class="n">週40時間以上（月160h）</td></tr>
+        <tr><td>鑑定歴 / 使用カード</td><td class="n">2ヶ月 / 大アルカナ22枚</td></tr>
+        <tr><td>相談内容</td><td class="n">恋愛8割・仕事2割（基本は人間関係）</td></tr>
+        <tr><td>対応形式</td><td class="n">顔出し可・電話・チャット・Zoom・動画すべて可</td></tr>
+        <tr><td>世界観の縛り</td><td class="n">なし（利益最大化優先）</td></tr>
+        <tr><td>事業形態</td><td class="n">未開業</td></tr>
+        <tr><td>渡邊さんの関与</td><td class="n">集客・運用も実働</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
 <section id="s1">
-  <div class="shead"><span class="num">I</span><h2>3つのボトルネック</h2></div>
+  <div class="shead"><span class="num">I</span><h2>最大の発見：漏れている場所</h2></div>
+  <p class="lede">3段の数字が、この事業の全てを説明しています。実測値でファネルを描くとこうなります。</p>
+
+  <div class="leak">
+    <div class="leakrow">
+      <div class="leaklab"><b>無料鑑定</b><span class="q">250件 / 月</span><span class="pc">100%</span></div>
+      <div class="leakbar"><i style="width:100%"></i></div>
+      <div class="leaknote">活動2ヶ月でこの件数。需要も露出も足りている</div>
+    </div>
+    <div class="leakrow">
+      <div class="leaklab"><b>LINE登録</b><span class="q">70人</span><span class="pc">28%</span></div>
+      <div class="leakbar lost"><i style="width:28%"></i></div>
+      <div class="leaknote">最大の漏れ口。180人が跡形もなく消えている</div>
+    </div>
+    <div class="leakrow">
+      <div class="leaklab"><b>LINE経由の有料</b><span class="q">5件</span><span class="pc">2%</span></div>
+      <div class="leakbar"><i style="width:2%"></i></div>
+      <div class="leaknote">ステップ配信がないので、登録後に何も起きていない</div>
+    </div>
+  </div>
+
   <div class="body">
-    <h3>① 無料鑑定が「無料で完結」している</h3>
-    <p>Threads の初回無料鑑定は LINE 登録までは機能していますが、有料への橋が架かっていません。無料鑑定の中で悩みが「解決」してしまうと、次を買う理由が消えます。</p>
-    <h3>② ココナラ電話が時間を焼いている</h3>
-    <p>手数料6割は、時間単価を一撃で6割削ります。1時間5,000円の鑑定が実質2,000円。<strong>ここは今月で止める判断が必要です。</strong></p>
-    <h3>③ 自社資産（LINEリスト）が100人未満</h3>
-    <p>フルコミットできる稼働時間があるのに、資産形成に配分されていません。予算ゼロでの勝ち筋は「オーガニックでリストを積む」一本道。だから<strong>リスト数を最優先 KPI に置きます</strong>。</p>
+    <h3>転換率の認識と実測にズレがあります</h3>
+    <p>体感では「1割以上2割未満」ですが、分母を月の無料鑑定件数で取ると実測は <strong>5.6%</strong>（14件／250件）。さらにココナラ9件は無料鑑定由来ではない可能性が高いので、無料鑑定から有料への実線は <strong>2%</strong>（5件／250件）かもしれません。</p>
+    <p>ここを正確に測ることが最初の仕事です。ただし打ち手は、測る前から確定しています。</p>
+    <h3>時間の使われ方</h3>
+    <p>無料鑑定250件を1件12分でこなしても<strong>月50時間</strong>。これに対するリターンが、最大でも月28,000円。月160時間 ÷ 28,000円 ＝ <strong>時間単価175円</strong>です。</p>
   </div>
   <blockquote>
-    <p>売上を上げる前に、時間単価が上がる構造を作る。</p>
-    <p>最初の30日は「ココナラ電話を止める」「無料鑑定に出口を付ける」「リストを月+100人で積む」の3点だけに集中します。</p>
+    <p>集客は問題ない。受け皿（リスト化・単価・転換）だけが問題。</p>
+    <p>これは良いニュースです。一番作るのが難しい「人が集まる状態」はすでにできています。</p>
   </blockquote>
 </section>
 
 <section id="s2">
-  <div class="shead"><span class="num">II</span><h2>ジャンルとペルソナ</h2></div>
-  <p class="lede">「恋愛」に絞る。さらに「進まない関係」に絞る。</p>
+  <div class="shead"><span class="num">II</span><h2>3つのレバー</h2></div>
+  <p class="lede">インパクト順。1番は実装コストゼロで、今日からできます。</p>
   <div class="body">
-    <p>恋愛全般では競合に埋もれます。推奨サブジャンルは<strong>「答えが出ない関係に決着をつけたい人」</strong>。片思いが半年以上進まない／告白されないまま関係が続いている／音信不通／別れた相手を諦められない。</p>
-    <h3>この絞り方を選ぶ3つの理由</h3>
-    <p><strong>需要量が最大。</strong>占い需要の大半は恋愛・人間関係です。<br>
-    <strong>単価を上げられる。</strong>悩みが深く緊急性が高いので、数千円の相場に縛られません。<br>
-    <strong>リピートが自然に起きる。</strong>状況が動き続けるので「また見てほしい」が発生します。適職や相性は1回で終わってしまいます。</p>
-    <p>なお、不倫・複雑愛は需要も単価も高いジャンルですが、「深ひとみ」を長期ブランドとして使う前提ならメインには置かないことを推奨します（講座展開時に足枷になる）。相談が来たら受ける、という位置づけで十分です。</p>
+    <h3>レバー1：無料鑑定の申込窓口をLINEに一本化する【最優先】</h3>
+    <p>現在は「Threads投稿 → DMで無料鑑定 → 気に入った人がLINE登録（28%）」。<br>
+    変更後は「Threads投稿 → <strong>無料鑑定は公式LINEで受付中</strong> → LINE登録 → LINE内で無料鑑定」。</p>
+    <p>250件の接触がそのままリストになります。登録率は8割前後まで上がる想定で、<strong>月+200人</strong>。<strong>広告費ゼロで</strong>1ヶ月目270人 → 3ヶ月目670人 → 6ヶ月目1,270人 → 12ヶ月目2,470人。Phase 3 で必要な1,800〜2,500人に8〜11ヶ月目で届きます。</p>
+    <p>ThreadsのDMで直接鑑定するのを止めるだけです。実装コストはゼロ。</p>
+    <h3>レバー2：単価を2,000円 → 平均5,000円に組み替える</h3>
+    <p>同じ14件で28,000円 → 70,000円。コツは<strong>値上げではなく別商品として出すこと</strong>です。既存顧客に「値上げしました」と言うと離れますが、「新しいメニューを作りました」なら離れません。</p>
+    <h3>レバー3：LINE内の転換率を 7% → 20% にする</h3>
+    <p>ステップ配信を入れるだけ。70人 → 14件になります。</p>
+  </div>
+
+  <div class="ba">
+    <div>
+      <div class="t">現在</div>
+      <dl>
+        <dt>LINE友だち</dt><dd>70人</dd>
+        <dt>月の有料件数</dt><dd>14件</dd>
+        <dt>平均単価</dt><dd>2,000円</dd>
+        <div class="sep"></div>
+        <dt>月商</dt><dd class="big">28,000円</dd>
+      </dl>
+    </div>
+    <div>
+      <div class="t">3レバー実装後（2ヶ月目）</div>
+      <dl>
+        <dt>LINE友だち</dt><dd>270人</dd>
+        <dt>月の有料件数</dt><dd>21件</dd>
+        <dt>平均単価</dt><dd>4,800円</dd>
+        <div class="sep"></div>
+        <dt>月商</dt><dd class="big">約100,000円</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="eyebrow" style="margin-top:14px">Phase 1（月10万円）は2ヶ月で届きます — v1設計の3ヶ月から短縮</div>
+</section>
+
+<section id="s3">
+  <div class="shead"><span class="num">III</span><h2>大アルカナ22枚を旗にする</h2></div>
+  <p class="lede">鑑定歴2ヶ月・大アルカナのみ。ここは隠すより看板にします。</p>
+  <blockquote>
+    <p>「大アルカナ22枚だけで、関係の本質を読む」</p>
+  </blockquote>
+  <div class="body">
+    <p>78枚使わないことを<strong>「削ぎ落とし」</strong>として提示する。そして<strong>できないことを先に明言する</strong> — 細かい時期や第三者の詳細は読まない。これが信頼になります。</p>
+    <h3>訴求軸は「当たる」ではなく「整理がつく・決められる」</h3>
+    <p>鑑定歴2ヶ月で「当たる」を訴求するのは危険です。実績で殴られたときに返せません。「あなたの中で答えが決まる」なら鑑定歴は関係なくなります。そしてペルソナ（何度も友人に相談して呆れられている人）が本当に欲しいのは、当たる予言ではなく<strong>決断の後押し</strong>です。</p>
+    <h3>この旗は Phase 3 の講座に直結します</h3>
+    <p>一般向けタロット講座の最大のハードルは「78枚も覚えられない」こと。<strong>「22枚だけ覚えれば読めるようになる講座」</strong>は、学ぶ側の参入障壁を消します。教える側の鑑定歴が短いことも、「22枚に絞ったから短期間で読めるようになった」という物語として機能します。</p>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="shead"><span class="num">IV</span><h2>ジャンルとペルソナ</h2></div>
+  <p class="lede">相談は恋愛8割・仕事2割、基本は人間関係。仮説どおりだったので設計はそのまま使います。</p>
+  <div class="body">
+    <p>ジャンルは恋愛の中でもさらに絞って<strong>「進まない関係」</strong>。片思いが半年以上進まない／告白されないまま関係が続いている／音信不通／別れた相手を諦められない。</p>
+    <p>選ぶ理由は、需要量が最大・悩みが深く単価を上げられる・状況が動き続けるのでリピートが自然に起きる。<strong>リピート率2割弱がすでに出ているのは、この性質の証拠です。</strong></p>
   </div>
   <div class="persona">
     <div class="tag">メインペルソナ</div>
     <div class="line">28〜38歳・女性・会社員または専門職・年収300〜500万円</div>
-    <p class="story">好きな人との関係が半年以上進んでいない。または、別れた相手を忘れられない。友人には何度も相談して、もう呆れられている。親には言えない。夜、寝る前にスマホで TikTok ライブや占い動画を見ている。すでに他の占い師に1〜3回は見てもらったことがある。当たったこともあるが、結局状況は変わっていない。</p>
-    <p class="key">この人が買っているのは「答え」ではなく、<b>肯定と伴走</b>です。だから単発鑑定より継続商品が刺さる。これが月50万円到達の設計上の核になります。</p>
+    <p class="story">好きな人との関係が半年以上進んでいない。または別れた相手を忘れられない。友人には何度も相談して、もう呆れられている。親には言えない。夜、寝る前にスマホで TikTok ライブや占い動画を見ている。すでに他の占い師に1〜3回は見てもらったことがある。当たったこともあるが、結局状況は変わっていない。</p>
+    <p class="key">この人が買っているのは「答え」ではなく、<b>肯定と伴走</b>です。だから単発より継続商品が刺さる。これが月50万円到達の設計上の核になります。</p>
   </div>
   <div class="persona" style="margin-top:18px">
     <div class="tag">サブペルソナ（Phase 3 の講座用）</div>
-    <div class="line">30〜45歳・女性・タロット独学中、または講座を受けたが読めていない</div>
-    <p class="story">自分や身近な人を占えるようになりたい。あわよくば副業にしたい。「深ひとみの読み方」を学びたいという指名の動機がすでにある層。</p>
+    <div class="line">30〜45歳・女性・78枚が覚えられずタロットに挫折した</div>
+    <p class="story">自分や身近な人を占えるようになりたい。あわよくば副業にしたい。「22枚だけ」という入口が、この層の唯一のハードルを外します。</p>
   </div>
 </section>
 
-<section id="s3">
-  <div class="shead"><span class="num">III</span><h2>商品ラインナップ</h2></div>
-  <p class="lede">無料から月額会員まで、4段の階段を作ります。各段の役割が重複しないことが設計の要点です。</p>
+<section id="s5">
+  <div class="shead"><span class="num">V</span><h2>商品ラインナップ</h2></div>
+  <p class="lede">2,000円からいきなり15,000円は飛べません。段を細かく刻みます。</p>
   <div class="wide tw">
     <table>
-      <caption>主力4段</caption>
-      <thead><tr><th>段</th><th>商品</th><th class="n">価格</th><th>形式</th><th>役割</th></tr></thead>
+      <caption>主力ライン</caption>
+      <thead><tr><th>段</th><th>商品</th><th class="n">価格</th><th>形式</th><th class="n">投入</th></tr></thead>
       <tbody>
-        <tr><td>F</td><td>無料1枚引き</td><td class="n">0円</td><td>Threads／ライブ・80字以内</td><td>LINE登録だけが目的。1人3分</td></tr>
-        <tr><td>T</td><td>1問1答タロット</td><td class="n">2,980円</td><td>テキスト納品・24時間以内</td><td>「お金を払う体験」を作る</td></tr>
-        <tr><td>M</td><td>決着セッション</td><td class="n">15,000〜19,800円</td><td>60分＋鑑定書PDF＋7日LINEフォロー</td><td>主力</td></tr>
-        <tr><td>B1</td><td>月いちタロット伴走会員</td><td class="n">月4,980円</td><td>月1回30分＋LINE1枚引き月3回</td><td>50万到達の本体</td></tr>
-        <tr><td>B2</td><td>タロットが読めるようになる講座</td><td class="n">49,800円</td><td>全6回グループ</td><td>Phase 3 から</td></tr>
+        <tr><td>F</td><td>無料1枚引き</td><td class="n">0円</td><td><strong>LINE内</strong>・大アルカナ1枚・80字・1人3分</td><td class="n">即</td></tr>
+        <tr><td>T1</td><td>1問1答タロット</td><td class="n">2,980円</td><td>テキスト納品・24時間以内</td><td class="n">即</td></tr>
+        <tr><td>T2</td><td>3枚読み鑑定</td><td class="n">5,980円</td><td>テキスト納品・48時間以内</td><td class="n">即</td></tr>
+        <tr><td>M1</td><td>深掘りセッション45分</td><td class="n">9,800円</td><td>Zoom または電話</td><td class="n">1ヶ月目</td></tr>
+        <tr><td>M2</td><td>決着セッション60分</td><td class="n">19,800円</td><td>Zoom＋鑑定書PDF＋7日LINEフォロー</td><td class="n">Phase 2</td></tr>
+        <tr><td>B1</td><td>月いち伴走会員</td><td class="n">月4,980円</td><td>月1回30分＋LINE1枚引き月3回</td><td class="n">Phase 2</td></tr>
+        <tr><td>B2</td><td>22枚で読めるようになる講座</td><td class="n">39,800円</td><td>全4回グループ</td><td class="n">Phase 3</td></tr>
       </tbody>
     </table>
   </div>
@@ -352,21 +473,21 @@ tr.total td.n{color:var(--gold)}
       <thead><tr><th>商品</th><th class="n">価格</th><th class="n">所要</th><th>備考</th></tr></thead>
       <tbody>
         <tr><td>動画鑑定納品</td><td class="n">8,800円</td><td class="n">30分</td><td>15分の動画を録って送る。同期不要＝自分のペースで作れる</td></tr>
-        <tr><td>出張占い（イベント）</td><td class="n">30,000〜50,000円</td><td class="n">1日</td><td>カフェ・美容室・マルシェ。実績と対面スキルが同時に積める。即効性あり</td></tr>
+        <tr><td>出張占い（イベント）</td><td class="n">30,000〜50,000円</td><td class="n">1日</td><td>カフェ・美容室・マルシェ。実績と対面スキルが同時に積める</td></tr>
       </tbody>
     </table>
   </div>
   <div class="body">
-    <h3>なぜ決着セッションを15,000円に置けるか</h3>
-    <p>「60分の占い」では相場に引きずられます。売るのは<strong>成果物</strong>です。鑑定書PDF（カードの写真＋読み解き＋次の3週間の行動指針）と、7日間のLINEフォロー。この2つを付けると「60分の会話」ではなく「3週間の伴走」になります。だから15,000円が成立する。<strong>鑑定書テンプレートを最初に作ることが、単価の土台です。</strong></p>
-    <h3>月額会員の設計上の制約</h3>
-    <p>個別対応は40人が限界です。超えたら個別30分を<strong>月1回のZoomグループ鑑定会</strong>に切り替えてください。人数が増えても時間が一定になります。<br>そしてもう一つ重要な原則：<strong>月額会員は新規から取らず、鑑定済みの顧客から引き上げる。</strong>セッションを受けて満足した人にだけ案内します。</p>
+    <h3>なぜ決着セッションを19,800円に置けるか</h3>
+    <p>売るのは「60分の会話」ではなく<strong>成果物</strong>です。鑑定書PDF（引いたカードの写真＋読み解き＋次の3週間の行動指針）と、7日間のLINEフォロー（動いた結果を報告できて、追加で1枚引いてもらえる）。この2つで「3週間の伴走」になります。<strong>鑑定書テンプレートを最初に作ることが単価の土台です。</strong>顔出し・Zoomが使えるので、ここは強く作れます。</p>
+    <h3>月額会員の設計原則</h3>
+    <p><strong>新規から取らず、鑑定済みの顧客から引き上げる。</strong>すでにリピート率2割弱が出ているので、受け皿を作るだけで一定数は入ります。個別対応は30人が限界。超えたら月1回のZoomグループ鑑定会に切り替えます。</p>
   </div>
 </section>
 
-<section id="s4">
-  <div class="shead"><span class="num">IV</span><h2>3フェーズの数値設計</h2></div>
-  <p class="lede">単発鑑定の積み上げだけでは50万円に届きません。月額会員が主柱に入れ替わることが、このグラフの読みどころです。</p>
+<section id="s6">
+  <div class="shead"><span class="num">VI</span><h2>3フェーズの数値設計</h2></div>
+  <p class="lede">単発鑑定の積み上げでは50万円に届きません。<strong>月額会員が主柱に入れ替わること</strong>が、このグラフの読みどころです。</p>
 
   <div class="chart">
     <div class="axis" aria-hidden="true">
@@ -379,120 +500,169 @@ tr.total td.n{color:var(--gold)}
     </div>
     <div class="bars">
       <div class="barrow">
-        <div class="barhead"><span class="ph">Phase 1<em>1〜3ヶ月目</em></span><span class="tot">98,460円 / 月</span></div>
+        <div class="barhead"><span class="ph">Phase 1<em>1〜2ヶ月目</em></span><span class="tot">101,040円 / 月</span></div>
         <div class="track">
           <div class="grid"><i style="left:19.23%"></i><i style="left:38.46%"></i><i style="left:57.69%"></i><i style="left:76.92%"></i><i style="left:96.15%"></i></div>
           <div class="bar">
-            <div class="seg s1" style="width:11.54%" title="決着セッション 15,000円×4件 = 60,000円"></div>
-            <div class="seg s4" style="width:4.01%" title="1問1答 2,980円×7件 = 20,860円"></div>
-            <div class="seg s4" style="width:3.38%; opacity:.6" title="動画鑑定 8,800円×2件 = 17,600円"></div>
+            <div class="seg s4" style="width:13.78%" title="テキスト鑑定 71,640円"></div>
+            <div class="seg s1" style="width:5.65%" title="深掘りセッション 9,800円×3件 = 29,400円"></div>
           </div>
         </div>
-        <div class="eyebrow">必要LINEリスト 350人 — 月+100人ペース</div>
+        <div class="eyebrow">必要LINEリスト 140人 — 現状70人＋レバー1で初月に超過</div>
       </div>
       <div class="barrow">
-        <div class="barhead"><span class="ph">Phase 2<em>4〜7ヶ月目</em></span><span class="tot">198,760円 / 月</span></div>
+        <div class="barhead"><span class="ph">Phase 2<em>3〜6ヶ月目</em></span><span class="tot">201,280円 / 月</span></div>
         <div class="track">
           <div class="grid"><i style="left:19.23%"></i><i style="left:38.46%"></i><i style="left:57.69%"></i><i style="left:76.92%"></i><i style="left:96.15%"></i></div>
           <div class="bar">
-            <div class="seg s1" style="width:19.04%" title="決着セッション 19,800円×5件 = 99,000円"></div>
-            <div class="seg s2" style="width:11.49%" title="月額会員 4,980円×12人 = 59,760円"></div>
-            <div class="seg s4" style="width:7.69%" title="トライアル・動画鑑定 = 40,000円"></div>
+            <div class="seg s4" style="width:12.12%" title="テキスト鑑定 63,000円"></div>
+            <div class="seg s1" style="width:20.85%" title="セッション 108,400円"></div>
+            <div class="seg s2" style="width:5.75%" title="月額会員 4,980円×6人 = 29,880円"></div>
           </div>
         </div>
-        <div class="eyebrow">必要LINEリスト 700〜900人</div>
+        <div class="eyebrow">必要LINEリスト 400〜700人</div>
       </div>
       <div class="barrow">
-        <div class="barhead"><span class="ph">Phase 3<em>8〜12ヶ月目</em></span><span class="tot">507,200円 / 月</span></div>
+        <div class="barhead"><span class="ph">Phase 3<em>7〜12ヶ月目</em></span><span class="tot">498,400円 / 月</span></div>
         <div class="track">
           <div class="grid"><i style="left:19.23%"></i><i style="left:38.46%"></i><i style="left:57.69%"></i><i style="left:76.92%"></i><i style="left:96.15%"></i></div>
           <div class="bar">
-            <div class="seg s1" style="width:30.46%" title="決着セッション 19,800円×8件 = 158,400円"></div>
-            <div class="seg s2" style="width:38.31%" title="月額会員 4,980円×40人 = 199,200円"></div>
-            <div class="seg s3" style="width:19.15%" title="講座 49,800円×2名 = 99,600円"></div>
-            <div class="seg s4" style="width:9.62%" title="トライアル・動画・イベント = 50,000円"></div>
+            <div class="seg s4" style="width:13.85%" title="テキスト鑑定 72,000円"></div>
+            <div class="seg s1" style="width:37.96%" title="セッション 197,400円"></div>
+            <div class="seg s2" style="width:28.73%" title="月額会員 4,980円×30人 = 149,400円"></div>
+            <div class="seg s3" style="width:15.31%" title="22枚講座 39,800円×2名 = 79,600円"></div>
           </div>
         </div>
-        <div class="eyebrow">必要LINEリスト 1,800〜2,500人</div>
+        <div class="eyebrow">必要LINEリスト 1,800〜2,500人 — レバー1が機能すれば8〜11ヶ月目で到達</div>
       </div>
     </div>
     <div class="legend">
-      <span><i class="k1"></i>決着セッション</span>
-      <span><i class="k2"></i>月額会員</span>
-      <span><i class="k3"></i>タロット講座</span>
-      <span><i class="k4"></i>トライアル・動画・イベント</span>
+      <span><i class="k4"></i>テキスト鑑定（1問1答・3枚読み）</span>
+      <span><i class="k1"></i>セッション（45分・60分）</span>
+      <span><i class="k2"></i>月いち伴走会員</span>
+      <span><i class="k3"></i>22枚講座</span>
     </div>
   </div>
 
   <div class="wide tw">
     <table>
-      <caption>Phase 3 の時間検証 — 月160時間の枠に収まるか</caption>
+      <caption>Phase 3 の時間検証 — ひとみさんの月160時間に収まるか</caption>
       <thead><tr><th>業務</th><th class="n">月あたり</th></tr></thead>
       <tbody>
-        <tr><td>決着セッション 8件 × 2.5時間（準備＋60分＋鑑定書）</td><td class="n">20 h</td></tr>
-        <tr><td>月額会員 40人 × 0.7時間</td><td class="n">28 h</td></tr>
-        <tr><td>講座（月4回 × 2時間・グループ開催）</td><td class="n">8 h</td></tr>
-        <tr><td>集客（ライブ週3×1.5h ＋ Threads毎日1h ＋ 無料鑑定）</td><td class="n">60 h</td></tr>
-        <tr><td>事務・制作・振り返り</td><td class="n">20 h</td></tr>
-        <tr class="total"><td>合計 — 稼働枠160時間に対して余白24時間</td><td class="n">136 h</td></tr>
+        <tr><td>テキスト鑑定 16件 × 0.5h</td><td class="n">8 h</td></tr>
+        <tr><td>深掘りセッション 6件 × 1.3h</td><td class="n">8 h</td></tr>
+        <tr><td>決着セッション 7件 × 2.5h（準備＋60分＋鑑定書）</td><td class="n">18 h</td></tr>
+        <tr><td>月額会員 30人 × 0.7h</td><td class="n">21 h</td></tr>
+        <tr><td>講座（月4回 × 2h・グループ開催）</td><td class="n">8 h</td></tr>
+        <tr><td>TikTokライブ（週3 × 1.5h）</td><td class="n">18 h</td></tr>
+        <tr><td>無料鑑定 250件 × 4分 ＋ Threads投稿</td><td class="n">29 h</td></tr>
+        <tr><td>事務・振り返り</td><td class="n">10 h</td></tr>
+        <tr class="total"><td>合計 — 稼働枠160時間に対して余白40時間</td><td class="n">120 h</td></tr>
       </tbody>
     </table>
   </div>
   <blockquote style="margin-top:26px">
-    <p>フェーズ移行は「2ヶ月連続で目標達成」が条件。1ヶ月だけの達成では動かない。</p>
-    <p>1回のまぐれで次の商品開発に手を出すと、既存商品と新商品の両方が中途半端になります。</p>
+    <p>前提は「無料鑑定を1件4分に収めること」。ここが12分に戻ると一気に破綻します。</p>
+    <p>そしてフェーズ移行は2ヶ月連続で目標達成が条件。1ヶ月だけの達成では動かない。</p>
   </blockquote>
 </section>
 
-<section id="s5">
-  <div class="shead"><span class="num">V</span><h2>動線と LINE ステップ配信</h2></div>
-  <p class="lede">現状の穴は4つ。無料鑑定に出口がない／ココナラ電話で6割取られる／LINE登録後に何も起きない／鑑定後のリピート案内がない。</p>
+<section id="s7">
+  <div class="shead"><span class="num">VII</span><h2>役割分担</h2></div>
+  <p class="lede">渡邊さんが手を動かせることが、この事業の最大の資産です。ひとみさんの時間を鑑定とライブだけに集中させられます。</p>
+  <div class="roles">
+    <div class="role">
+      <div class="who"><small>鑑定の顔</small>深ひとみ</div>
+      <ul>
+        <li>有料鑑定すべて</li>
+        <li>無料鑑定の<b>「カードを引いて80字書く」部分のみ</b></li>
+        <li>TikTokライブ（週3回）</li>
+        <li>Threads の投稿（本人の言葉が必要な部分）</li>
+        <li>講座の講師（Phase 3）</li>
+      </ul>
+    </div>
+    <div class="role">
+      <div class="who"><small>仕組み側</small>渡邊光希</div>
+      <ul>
+        <li><b>無料鑑定の受付・振り分け・LINE誘導</b>（ここが最重要）</li>
+        <li>LINE ステップ配信の作成・改善</li>
+        <li>LP 制作</li>
+        <li>数値記録・週次レビュー</li>
+        <li>決済・会員管理・ココナラの受注管理</li>
+        <li>商品設計と価格改定の判断</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wide tw">
+    <table>
+      <caption>この分担が生む効果 — 無料鑑定1件あたりのひとみさんの工数</caption>
+      <thead><tr><th>工程</th><th class="n">現在</th><th class="n">分担後</th></tr></thead>
+      <tbody>
+        <tr><td>受付・やりとり</td><td class="n">ひとみさん</td><td class="n">渡邊さん</td></tr>
+        <tr><td>カードを引いて読む</td><td class="n">3分</td><td class="n">3分</td></tr>
+        <tr><td>文章を書く・返信</td><td class="n">8分</td><td class="n">1分</td></tr>
+        <tr><td>1件あたり</td><td class="n">12分</td><td class="n">4分</td></tr>
+        <tr class="total"><td>月250件の合計 — 33時間が空く</td><td class="n">50 h</td><td class="n">17 h</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="body">
+    <p>空いた33時間を決着セッションとライブに回すと、<strong>それだけで月商が数万円動きます。</strong></p>
+  </div>
+</section>
+
+<section id="s8">
+  <div class="shead"><span class="num">VIII</span><h2>動線とステップ配信</h2></div>
 
   <div class="funnel">
     <div class="step free">
-      <span class="who">Threads / TikTokライブ<small>無料1枚引き・80字以内・1人3分・1日10人まで</small></span>
+      <span class="who">Threads 投稿 / TikTokライブ<small>フォロワー290人で月250件の無料鑑定が来ている段階</small></span>
       <span class="price">0円</span>
     </div>
-    <div class="link">未完了で終わらせる</div>
-    <div class="step free">
-      <span class="who">公式LINE 登録<small>唯一の自社資産。月+100人が最優先KPI</small></span>
-      <span class="price">最優先KPI</span>
+    <div class="link">「無料鑑定は公式LINEで受付中」— レバー1</div>
+    <div class="step keep">
+      <span class="who">公式LINE 登録<small>唯一の自社資産。無料鑑定はここから先でしか受けない</small></span>
+      <span class="price">月+200人</span>
     </div>
-    <div class="link">ステップ配信 7通</div>
+    <div class="link">LINE内で無料1枚引き → ステップ配信 7通</div>
     <div class="step paid">
-      <span class="who">1問1答タロット<small>テキスト納品・24時間以内。初回限定・48時間オファー</small></span>
-      <span class="price">2,980円 — 目標転換率 8%</span>
+      <span class="who">1問1答 / 3枚読み<small>テキスト納品。初回限定・48時間オファー</small></span>
+      <span class="price">2,980 / 5,980円 — 目標 8%</span>
     </div>
     <div class="link">納品時に案内</div>
     <div class="step paid">
-      <span class="who">決着セッション<small>60分＋鑑定書PDF＋7日間LINEフォロー</small></span>
-      <span class="price">15,000〜19,800円 — 目標 25%</span>
+      <span class="who">深掘りセッション → 決着セッション<small>Zoom。60分＋鑑定書PDF＋7日間LINEフォロー</small></span>
+      <span class="price">9,800 / 19,800円 — 目標 25%</span>
     </div>
     <div class="link">7日フォロー終了時に案内</div>
     <div class="step keep">
-      <span class="who">月額会員 / タロット講座<small>鑑定済みの顧客からのみ引き上げる</small></span>
-      <span class="price">4,980円 / 49,800円 — 目標 30%</span>
+      <span class="who">月いち伴走会員 / 22枚講座<small>鑑定済みの顧客からのみ引き上げる</small></span>
+      <span class="price">4,980 / 39,800円 — 目標 30%</span>
     </div>
   </div>
 
   <div class="body">
-    <h3>最重要：無料鑑定の締め方を変える</h3>
-    <p>Threads の回答は、必ずこの型で締めます。</p>
+    <h3>無料鑑定の3つのルール</h3>
+    <p><strong>① 窓口はLINEのみ。</strong>Threads のDMで完結させない。<br>
+    <strong>② 1件3分・80字以内。</strong>大アルカナ1枚だけ引く。<br>
+    <strong>③ 未完了で終わらせる。</strong>締めの型を固定する：</p>
   </div>
   <blockquote>
-    <p>「◯◯のカードが出ています。ただ、<b>なぜそうなっているのか</b>まではこの1枚では見えません。そこを深く見たいときは、LINEで受け付けています。」</p>
+    <p>「◯◯のカードが出ています。ただ、<b>なぜそうなっているのか</b>まではこの1枚では見えません。そこを深く見たいときは、メニューからお選びください。」</p>
   </blockquote>
   <div class="body">
-    <p>ポイントは<strong>未完了で終わらせること</strong>。「解決」させてしまうと次がなくなります。TikTokライブは週3回・21:00〜22:30で固定して視聴習慣を作り、「個別で深く見たい人はプロフィールのLINEから」を配信中に3回言います。</p>
+    <p>「解決」させると次を買う理由が消えます。<strong>月250件やっていて有料14件なのは、ここが原因です。</strong></p>
+    <h3>TikTokライブ</h3>
+    <p>週3回・21:00〜22:30で固定（視聴習慣を作る）。コメントから1枚引きを公開でやり、「個別で深く見たい人はプロフィールのLINEから」を配信中に3回言う。フォロワー290人で月250件来ているので、<strong>ライブの回数を増やすほど直線的に伸びる段階</strong>です。</p>
   </div>
 
   <div class="wide tw">
     <table>
-      <caption>LINEステップ配信 7通 — 自作可・最優先で実装</caption>
+      <caption>LINEステップ配信 7通 — 渡邊さんが自作・最優先</caption>
       <thead><tr><th class="n">日</th><th>内容</th><th>目的</th></tr></thead>
       <tbody>
-        <tr><td class="n">1</td><td>登録御礼＋深ひとみの自己紹介（なぜタロットなのか／自分の失敗談）</td><td>人として認識させる</td></tr>
-        <tr><td class="n">2</td><td>タロットで何がわかって、何がわからないか</td><td>期待値調整＝信頼になる</td></tr>
+        <tr><td class="n">1</td><td>登録御礼＋深ひとみの自己紹介（なぜ22枚なのか／自分の失敗談）</td><td>人として認識させる</td></tr>
+        <tr><td class="n">2</td><td>大アルカナ22枚で何がわかって、何がわからないか</td><td>期待値調整＝信頼になる</td></tr>
         <tr><td class="n">3</td><td>「進まない関係」に共通する3つのパターン</td><td>ペルソナに刺す価値提供</td></tr>
         <tr><td class="n">4</td><td>お客様の変化ストーリー 1本</td><td>証拠</td></tr>
         <tr><td class="n">5</td><td>よくある質問（怖くないか／当たるとは／料金）</td><td>不安の除去</td></tr>
@@ -503,53 +673,93 @@ tr.total td.n{color:var(--gold)}
   </div>
 
   <div class="body">
-    <h3>ココナラの再定義</h3>
-    <p>電話相談は停止。テキスト鑑定のみ継続（手数料22%）。そして目的を「売上」から<strong>「レビューを100件積むこと」</strong>に変更します。レビュー数は SNS と LP で使える唯一の第三者証明です。規約上ココナラ内から直接LINEへ誘導するのはNGなので、納品物に「深ひとみ」の名前と世界観を残し、<strong>指名検索させる</strong>導線にします。</p>
-    <h3>決済</h3>
-    <p>STORES（手数料3.6%）を継続。月額会員は STORES のサブスクリプション機能を使えば追加コストなしで実装できます。</p>
+    <h3>ココナラの再定義：止めずに「単価の実験場」にする</h3>
+    <p>ココナラ9件 vs LINE経由5件。<strong>現状はココナラの方が売れています。</strong>検索需要があるので捨てるのは損です。</p>
+    <p><strong>電話相談のみ停止</strong>（手数料6割は割に合わない）。テキスト鑑定は継続（手数料22%）。役割を2つに変更 — <strong>①レビューを100件積む ②新価格が売れるか試す実験場</strong>。5,980円のテキスト鑑定がココナラで売れるなら、LINE側でも自信を持って出せます。売れなければ価格か訴求を直す。<strong>検証コストの安いテスト環境</strong>として使ってください。</p>
+    <p>規約上ココナラ内から直接LINEへ誘導するのはNGなので、納品物に「深ひとみ」の名前と世界観を残し、指名検索させる導線にします。</p>
   </div>
 </section>
 
-<section id="s6">
-  <div class="shead"><span class="num">VI</span><h2>最初の90日</h2></div>
-  <p class="lede">週次ルーティンを固定してから、30日ごとの成果物を積みます。</p>
+<section id="s9">
+  <div class="shead"><span class="num">IX</span><h2>開業と法人設立</h2></div>
+  <p class="lede">今の法人化は反対です。月商28,000円で法人を作ると、固定費が売上を食います。</p>
+  <div class="wide tw">
+    <table>
+      <caption>法人化した場合の年間固定費</caption>
+      <thead><tr><th>項目</th><th class="n">金額</th></tr></thead>
+      <tbody>
+        <tr><td>法人住民税 均等割（赤字でも発生）</td><td class="n">年 7万円</td></tr>
+        <tr><td>設立費用（合同会社）</td><td class="n">6〜10万円</td></tr>
+        <tr><td>設立費用（株式会社）</td><td class="n">20〜25万円</td></tr>
+        <tr><td>税理士費用</td><td class="n">年 15〜30万円</td></tr>
+        <tr class="total"><td>年間固定費 — 現在の年商見込み34万円とほぼ同額</td><td class="n">28〜60万円</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="rules">
+    <div class="rule-item"><span class="k">01</span><p>今週 — 開業届＋青色申告承認申請（費用0円）<span>個人事業主として開業。e-Tax または税務署で同時提出。青色申告特別控除65万円が使えます。開業日から2ヶ月以内に承認申請が必要なので期限に注意</span></p></div>
+    <div class="rule-item"><span class="k">02</span><p>今月 — 屋号付きの事業用口座を開設<span>個人事業主名義で開設可。屋号付き口座に対応した銀行（GMOあおぞらネット銀行、PayPay銀行など）なら「深ひとみ」名義で受け取れて信頼面でもプラス。開業届の控えが必要なので01の後</span></p></div>
+    <div class="rule-item"><span class="k">03</span><p>Phase 3 達成後 — 法人化を検討<span>検討ラインは年間所得（売上−経費）が500万円超。月商50万×12ヶ月＝年商600万、経費を引いて所得400〜500万。つまり月50万が安定してから</span></p></div>
+  </div>
+  <div class="body">
+    <p>法人設立予定・事業用口座開設予定というお話でしたが、<strong>口座は今すぐ、法人は12ヶ月後</strong>が正しい配分です。</p>
+  </div>
+</section>
+
+<section id="s10">
+  <div class="shead"><span class="num">X</span><h2>最初の30日</h2></div>
   <div class="wide tw">
     <table>
       <caption>週次ルーティン — 曜日で固定する</caption>
-      <thead><tr><th>曜日</th><th>内容</th></tr></thead>
+      <thead><tr><th>曜日</th><th>ひとみさん</th><th>渡邊さん</th></tr></thead>
       <tbody>
-        <tr><td>月・水・金 21:00〜22:30</td><td>TikTokライブ（コメントから1枚引き）</td></tr>
-        <tr><td>火・木 各2時間</td><td>Threads 無料1枚引き対応（1日10人まで）</td></tr>
-        <tr><td>土</td><td>鑑定日 — 決着セッションを集中させる</td></tr>
-        <tr><td>日</td><td>コンテンツ制作・数字の振り返り</td></tr>
-        <tr><td>毎日 朝・夜</td><td>Threads 各1投稿</td></tr>
+        <tr><td>月・水・金 21:00〜22:30</td><td>TikTokライブ（コメント1枚引き）</td><td>ライブ中のLINE誘導・コメント拾い</td></tr>
+        <tr><td>火・木</td><td>無料鑑定のカード引き（各1.5h）</td><td>無料鑑定の受付・返信・振り分け</td></tr>
+        <tr><td>土</td><td>有料鑑定日（セッションを集中させる）</td><td>受注管理・決済確認</td></tr>
+        <tr><td>日</td><td>コンテンツ制作</td><td>数字の記録・週次レビュー</td></tr>
+        <tr><td>毎日 朝・夜</td><td>Threads 各1投稿</td><td>投稿の反応チェック</td></tr>
       </tbody>
     </table>
   </div>
   <div class="days">
     <div class="day">
+      <div class="d">〜7日目（今週）</div>
+      <ul>
+        <li>Threads の無料鑑定の窓口をLINEに変更（レバー1・最優先）</li>
+        <li>ココナラ電話を停止、テキストのみに</li>
+        <li>開業届＋青色申告承認申請を提出</li>
+        <li>無料鑑定の80字テンプレを固定（締めを「未完了」にする型）</li>
+      </ul>
+    </div>
+    <div class="day">
+      <div class="d">〜14日目</div>
+      <ul>
+        <li>1問1答2,980円・3枚読み5,980円を商品化（STORES登録）</li>
+        <li>LINEステップ配信7通を実装</li>
+        <li>屋号付き事業用口座を開設</li>
+      </ul>
+    </div>
+    <div class="day">
       <div class="d">〜30日目</div>
       <ul>
-        <li>ココナラ電話を停止、テキストのみに変更</li>
-        <li>LINEステップ配信 7通を実装</li>
-        <li>1問1答タロット 2,980円を商品化（STORES登録）</li>
-        <li>決着セッションのLP（1枚）を作成</li>
+        <li>深掘りセッション45分・9,800円のLP（1枚）を作成</li>
         <li>鑑定書PDFテンプレートを作成 — 単価の土台なので手を抜かない</li>
-        <li>無料1枚引きの回答テンプレ（80字）を固定</li>
+        <li>既存のリピート顧客（2割弱いる）に深掘りセッションを個別案内</li>
+        <li>無料鑑定の1件あたり工数を4分以内に収める運用を確立</li>
       </ul>
     </div>
     <div class="day">
       <div class="d">〜60日目</div>
       <ul>
-        <li>決着セッションの受注開始</li>
+        <li>月10万円を達成</li>
         <li>お客様の声を3件確保（許可を取って掲載）</li>
-        <li>動画鑑定 8,800円を商品化</li>
+        <li>動画鑑定8,800円を商品化</li>
+        <li>決着セッション19,800円の設計開始</li>
       </ul>
     </div>
     <div class="day">
       <div class="d">〜90日目</div>
       <ul>
-        <li>月10万円を達成</li>
         <li>月額会員のβ版を既存の鑑定顧客5人に個別案内</li>
         <li>価格は正規4,980円のまま、特典で「初月の1枚引き無制限」を付ける</li>
       </ul>
@@ -557,76 +767,83 @@ tr.total td.n{color:var(--gold)}
   </div>
 </section>
 
-<section id="s7">
-  <div class="shead"><span class="num">VII</span><h2>毎週金曜に記録する7つ</h2></div>
+<section id="s11">
+  <div class="shead"><span class="num">XI</span><h2>毎週金曜に記録する数字</h2></div>
+  <p class="lede">指標3が一番破られやすく、一番影響が大きい数字です。</p>
   <div class="wide tw">
     <table>
       <caption>週次KPI</caption>
-      <thead><tr><th class="n">#</th><th>指標</th><th>目標</th><th>なぜ見るか</th></tr></thead>
+      <thead><tr><th class="n">#</th><th>指標</th><th class="n">現在</th><th class="n">目標</th></tr></thead>
       <tbody>
-        <tr><td class="n">1</td><td>LINE友だち数（純増）</td><td class="n">+100人 / 月</td><td>唯一の自社資産。最優先KPI</td></tr>
-        <tr><td class="n">2</td><td>Threads無料鑑定 → LINE登録率</td><td class="n">—</td><td>無料鑑定の出口が機能しているか</td></tr>
-        <tr><td class="n">3</td><td>ライブ平均同時視聴 → LINE登録数</td><td class="n">—</td><td>配信1本の価値</td></tr>
-        <tr><td class="n">4</td><td>LINE → トライアル購入率</td><td class="n">8%</td><td>ステップ配信の性能</td></tr>
-        <tr><td class="n">5</td><td>トライアル → セッション引き上げ率</td><td class="n">25%</td><td>商品間の橋の強度</td></tr>
-        <tr><td class="n">6</td><td>セッション → 月額会員・リピート率</td><td class="n">30%</td><td>LTVの源泉</td></tr>
-        <tr class="total"><td class="n">7</td><td>月商 ÷ 稼働時間 ＝ 時間単価</td><td class="n">3,000円+</td><td>これが上がらない施策は捨てる</td></tr>
+        <tr><td class="n">1</td><td>LINE友だち数（純増）</td><td class="n">+70人 / 月</td><td class="n">+200人 / 月</td></tr>
+        <tr><td class="n">2</td><td>無料鑑定件数 → LINE登録率</td><td class="n">28%</td><td class="n">80%</td></tr>
+        <tr><td class="n">3</td><td>無料鑑定1件あたりのひとみさん工数</td><td class="n">12分</td><td class="n">4分以内</td></tr>
+        <tr><td class="n">4</td><td>LINE → 初回購入率</td><td class="n">7%</td><td class="n">8%以上</td></tr>
+        <tr><td class="n">5</td><td>テキスト鑑定 → セッション引き上げ率</td><td class="n">—</td><td class="n">25%</td></tr>
+        <tr><td class="n">6</td><td>セッション → 会員・リピート率</td><td class="n">2割弱</td><td class="n">30%</td></tr>
+        <tr><td class="n">7</td><td>平均単価</td><td class="n">2,000円</td><td class="n">4,800 → 8,000円</td></tr>
+        <tr class="total"><td class="n">8</td><td>月商 ÷ ひとみさんの稼働時間</td><td class="n">175円 / h</td><td class="n">3,000円 / h 以上</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
-<section id="s8">
-  <div class="shead"><span class="num">VIII</span><h2>判断ルール</h2></div>
-  <p class="lede">渡邊さんが「やる／やらない」を迷ったときに立ち返る4行です。</p>
+<section id="s12">
+  <div class="shead"><span class="num">XII</span><h2>判断ルール</h2></div>
+  <p class="lede">「やる／やらない」を迷ったときに立ち返る6行です。</p>
   <div class="rules">
-    <div class="rule-item"><span class="k">01</span><p>時間単価3,000円を下回る仕事は、3ヶ月以内に廃止する<span>例外は「レビューを積む目的のココナラ テキスト鑑定」だけ</span></p></div>
-    <div class="rule-item"><span class="k">02</span><p>無料鑑定は「1人3分・1日10人」の上限を絶対に守る<span>ここが崩れると事業全体が崩れる。一番破りやすいルール</span></p></div>
-    <div class="rule-item"><span class="k">03</span><p>フェーズ移行は2ヶ月連続達成が条件<span>1ヶ月の達成で次に進むと、既存と新規の両方が中途半端になる</span></p></div>
-    <div class="rule-item"><span class="k">04</span><p>新しい集客チャネルは、既存チャネルのKPIが目標値に届いてから足す<span>TikTok と Threads を回しきる前に Instagram や YouTube に広げない</span></p></div>
+    <div class="rule-item"><span class="k">01</span><p>時間単価3,000円を下回る仕事は3ヶ月以内に廃止する<span>例外は「レビューを積む目的のココナラ テキスト鑑定」だけ</span></p></div>
+    <div class="rule-item"><span class="k">02</span><p>無料鑑定は「1人3分・LINE内のみ」を絶対に守る<span>ここが崩れると事業全体が崩れる。一番破りやすいルール</span></p></div>
+    <div class="rule-item"><span class="k">03</span><p>無料鑑定の件数は減らさない<span>月250件は資産。工数を削るが件数は削らない</span></p></div>
+    <div class="rule-item"><span class="k">04</span><p>フェーズ移行は2ヶ月連続達成が条件<span>1ヶ月の達成で次に進むと、既存と新規の両方が中途半端になる</span></p></div>
+    <div class="rule-item"><span class="k">05</span><p>新しい集客チャネルは、既存チャネルのKPIが目標値に届いてから足す<span>TikTok と Threads を回しきる前に Instagram や YouTube に広げない</span></p></div>
+    <div class="rule-item"><span class="k">06</span><p>法人化は月商50万が安定してから<span>それまでは個人事業主・青色申告</span></p></div>
   </div>
 </section>
 
-<section id="s9">
-  <div class="shead"><span class="num">IX</span><h2>リスクと対策</h2></div>
+<section id="s13">
+  <div class="shead"><span class="num">XIII</span><h2>リスクと対策</h2></div>
   <div class="wide tw">
     <table>
       <caption>想定リスク</caption>
       <thead><tr><th>リスク</th><th>対策</th></tr></thead>
       <tbody>
-        <tr><td>ひとみさん依存（属人性）</td><td>Phase 3 の講座で「教える側」に立たせる。将来的に卒業生を鑑定師として抱える二段目を準備</td></tr>
-        <tr><td>プラットフォーム依存（アルゴリズム変動）</td><td>LINEリストが唯一の自社資産。リスト数を最優先KPIに置いているのはこのため</td></tr>
-        <tr><td>燃え尽き</td><td>月額会員40人が個別対応の限界。超えたらグループ鑑定会に切り替える</td></tr>
+        <tr><td>鑑定歴2ヶ月で「当たる」訴求ができない</td><td>訴求軸を「整理がつく・決められる」に置く。できないことを先に明言して信頼に変える</td></tr>
+        <tr><td>無料鑑定の工数が元に戻る</td><td>指標3（1件あたり工数）を毎週測る。渡邊さんが受付を握り続ける</td></tr>
+        <tr><td>ひとみさん依存（属人性）</td><td>Phase 3 の講座で「教える側」に立たせる。卒業生を鑑定師として抱える二段目を13ヶ月目以降に準備</td></tr>
+        <tr><td>プラットフォーム依存（アルゴリズム変動）</td><td>LINEリストが唯一の自社資産。レバー1を最優先にしているのはこのため</td></tr>
+        <tr><td>燃え尽き</td><td>月額会員30人が個別対応の限界。超えたらグループ鑑定会に切り替える</td></tr>
         <tr><td>表現リスク</td><td>「必ず当たる」「治る」等の断定表現を避ける。占いは娯楽・自己理解の枠で提示する</td></tr>
-        <tr><td>開業・税務</td><td>月10万を超える見込みが立った時点で開業届を提出。売上・経費の記録は初月から付ける</td></tr>
+        <tr><td>法人化の前倒しによる固定費倒れ</td><td>セクション IX の順序を守る</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
-<section id="s10" class="closing">
-  <div class="shead"><span class="num">X</span><h2>今週やる3つ</h2></div>
-  <p class="lede">予算0円、今週中に着手できます。ここが動いてからステップ配信とLPに進んでください。</p>
+<section id="s14" class="closing">
+  <div class="shead"><span class="num">XIV</span><h2>今週やる3つ</h2></div>
+  <p class="lede">全部、今週中に着手できます。特に1番は、やるかやらないかで12ヶ月後の姿が変わります。</p>
   <div class="three">
     <div>
       <div class="n">01</div>
-      <h3>ココナラ電話を止める</h3>
-      <p>時間単価を6割削っている元凶。テキスト鑑定だけ残し、レビュー獲得装置として使う。</p>
+      <h3>無料鑑定の窓口を LINE に一本化</h3>
+      <p>月250件の接触がそのままリストになります。月+200人。実装コストゼロ、今日からできる。これが全ての土台です。</p>
     </div>
     <div>
       <div class="n">02</div>
-      <h3>無料鑑定の締め方を変える</h3>
-      <p>「解決」で終わらせず「未完了」で終わらせる。80字テンプレを1つ作れば今日から使える。</p>
+      <h3>ココナラ電話を停止</h3>
+      <p>手数料6割は時間単価を一撃で6割削ります。テキストのみ残して、レビュー獲得と価格実験の場に転用。</p>
     </div>
     <div>
       <div class="n">03</div>
-      <h3>鑑定書PDFテンプレを作る</h3>
-      <p>15,000円を正当化する唯一の成果物。これがないと単価は相場に引き戻される。</p>
+      <h3>開業届＋青色申告承認申請</h3>
+      <p>費用0円で65万円控除。法人設立はまだ早い（セクション IX）。口座は屋号付きの個人事業主名義で。</p>
     </div>
   </div>
   <div class="foot">
-    深ひとみ タロット事業 成長設計 — 2026.09.13<br>
-    数値はヒアリング済みの4条件（週40時間以上・LINE100人未満・12ヶ月・予算0〜1万円）と、セクション0の仮置き前提にもとづく設計値です。実績値ではありません。
+    深ひとみ タロット事業 成長設計 v2 — 2026.09.13<br>
+    <strong>未確認事項：</strong>Threadsのフォロワー数（無料鑑定250件の源泉がThreadsかTikTokかで注力チャネルの判断が変わります）／無料鑑定250件の流入内訳／ココナラ9件のテキストと電話の比率（電話比率が高いほど停止のインパクトが大きい）。<br>
+    Phase別の数値はセクション0の実績から起こした設計値です。実績値ではありません。
   </div>
 </section>
 
