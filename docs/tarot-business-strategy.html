@@ -1,0 +1,633 @@
+<title>深ひとみ 事業設計書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F5F4F8; --surface:#FFFFFF; --surface-2:#FBFAFD;
+  --ink:#1A1830; --ink-2:#4A4763; --ink-3:#7C7994;
+  --rule:#DEDCE7; --rule-2:#C3C0D2;
+  --gold:#96702F; --gold-ink:#7A5A22; --gold-wash:#F0E7D4;
+  --teal:#2A6260; --plum:#77384C; --slate:#5F5C78;
+  --shadow:0 1px 2px rgba(26,24,48,.06), 0 8px 24px -16px rgba(26,24,48,.18);
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --serif:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#12111C; --surface:#1A1929; --surface-2:#16151F;
+    --ink:#EDECF4; --ink-2:#B4B1C6; --ink-3:#85819A;
+    --rule:#2C2A3E; --rule-2:#3E3B54;
+    --gold:#D9AE63; --gold-ink:#E5C288; --gold-wash:#2A2317;
+    --teal:#62B5B0; --plum:#D2879C; --slate:#9C98B8;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12111C; --surface:#1A1929; --surface-2:#16151F;
+  --ink:#EDECF4; --ink-2:#B4B1C6; --ink-3:#85819A;
+  --rule:#2C2A3E; --rule-2:#3E3B54;
+  --gold:#D9AE63; --gold-ink:#E5C288; --gold-wash:#2A2317;
+  --teal:#62B5B0; --plum:#D2879C; --slate:#9C98B8;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1000px; margin:0 auto; padding-inline:20px; padding-block:0 88px}
+h1,h2,h3,h4{font-family:var(--serif); text-wrap:balance; margin:0}
+p{margin:0}
+a{color:var(--gold-ink)}
+.eyebrow{
+  font-family:var(--mono); font-size:11px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+}
+
+/* ---- masthead ---- */
+.masthead{padding-block:56px 40px; border-bottom:2px solid var(--ink)}
+.masthead .kicker{display:flex; gap:14px; align-items:baseline; flex-wrap:wrap; margin-bottom:22px}
+.arcana{
+  font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--gold);
+  border:1px solid var(--gold); border-radius:2px; padding:2px 8px;
+}
+h1{font-size:clamp(32px,6.2vw,54px); line-height:1.22; font-weight:700; letter-spacing:.01em}
+.masthead .sub{margin-top:18px; max-width:62ch; color:var(--ink-2); font-size:17px}
+.meta{
+  margin-top:30px; display:flex; flex-wrap:wrap; gap:8px 28px;
+  font-family:var(--mono); font-size:12px; color:var(--ink-3);
+}
+
+/* ---- verdict band ---- */
+.verdict{
+  margin-block:40px; padding:28px 30px; background:var(--surface);
+  border:1px solid var(--rule); border-left:3px solid var(--gold);
+  box-shadow:var(--shadow);
+}
+.verdict h2{font-size:20px; margin-bottom:14px}
+.verdict p{color:var(--ink-2); max-width:66ch}
+.verdict .now{
+  margin-top:22px; display:flex; flex-wrap:wrap; gap:26px 44px;
+  padding-top:22px; border-top:1px solid var(--rule);
+}
+.stat .l{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--ink-3); text-transform:uppercase}
+.stat .v{font-family:var(--serif); font-size:30px; font-weight:700; line-height:1.25; font-variant-numeric:tabular-nums}
+.stat .v small{font-size:15px; font-weight:400; color:var(--ink-2); margin-left:3px}
+.stat.hero .v{color:var(--gold)}
+
+/* ---- toc ---- */
+.toc{margin-block:44px; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding-block:20px}
+.toc ol{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:2px 32px}
+.toc li{display:flex; gap:12px; align-items:baseline; font-size:14.5px}
+.toc .n{font-family:var(--mono); font-size:11.5px; color:var(--gold); min-width:26px; letter-spacing:.06em}
+.toc a{color:var(--ink-2); text-decoration:none; border-bottom:1px solid transparent}
+.toc a:hover,.toc a:focus-visible{color:var(--ink); border-bottom-color:var(--rule-2)}
+
+/* ---- sections ---- */
+section{margin-block:64px; scroll-margin-top:20px}
+.shead{display:flex; gap:18px; align-items:baseline; margin-bottom:8px}
+.shead .num{
+  font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--gold);
+  padding-top:8px; flex:none; min-width:34px;
+}
+.shead h2{font-size:clamp(22px,3.4vw,29px); font-weight:600; line-height:1.4}
+.lede{color:var(--ink-2); max-width:66ch; margin-top:10px; font-size:16.5px}
+.body{max-width:70ch; margin-top:22px; display:flex; flex-direction:column; gap:18px}
+.body h3{font-size:18px; font-weight:600; margin-top:14px}
+.body strong{font-weight:700}
+.wide{margin-top:26px}
+
+/* ---- pull quote ---- */
+blockquote{
+  margin:0; padding:20px 24px; background:var(--gold-wash);
+  border:0; border-left:3px solid var(--gold);
+  font-family:var(--serif); font-size:18px; line-height:1.8; color:var(--ink);
+}
+blockquote p + p{margin-top:10px}
+
+/* ---- tables ---- */
+.tw{overflow-x:auto; border:1px solid var(--rule); background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:460px; font-size:14.5px; line-height:1.65}
+caption{
+  text-align:left; padding:14px 16px; font-family:var(--mono); font-size:11px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  border-bottom:1px solid var(--rule); background:var(--surface-2);
+}
+th,td{padding:11px 16px; text-align:left; border-bottom:1px solid var(--rule); vertical-align:top}
+thead th{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); font-weight:500; white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right; font-family:var(--mono); font-variant-numeric:tabular-nums; white-space:nowrap}
+tr.total td{font-weight:700; background:var(--surface-2); border-top:1px solid var(--rule-2)}
+tr.total td.n{color:var(--gold)}
+
+/* ---- phase chart ---- */
+.chart{margin-top:26px}
+.axis{position:relative; height:18px; margin-left:0}
+.axis span{
+  position:absolute; top:0; transform:translateX(-50%);
+  font-family:var(--mono); font-size:10.5px; color:var(--ink-3); white-space:nowrap;
+}
+.axis span:first-child{transform:none}
+.bars{display:flex; flex-direction:column; gap:20px; border-top:1px solid var(--rule-2); padding-top:20px}
+.barrow{display:flex; flex-direction:column; gap:7px}
+.barhead{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap}
+.barhead .ph{font-family:var(--serif); font-size:16px; font-weight:600}
+.barhead .ph em{font-style:normal; font-family:var(--mono); font-size:11px; color:var(--ink-3); letter-spacing:.1em; margin-left:8px}
+.barhead .tot{font-family:var(--mono); font-size:15px; font-weight:600; color:var(--gold); font-variant-numeric:tabular-nums}
+.track{position:relative; background:var(--surface-2); border:1px solid var(--rule); height:30px}
+.grid{position:absolute; inset:0; pointer-events:none}
+.grid i{position:absolute; top:0; bottom:0; width:1px; background:var(--rule)}
+.bar{position:relative; display:flex; height:100%}
+.seg{height:100%}
+.seg.s1{background:var(--gold)} .seg.s2{background:var(--teal)}
+.seg.s3{background:var(--plum)} .seg.s4{background:var(--slate)}
+.legend{display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:18px; font-size:13px; color:var(--ink-2)}
+.legend span{display:flex; align-items:center; gap:8px}
+.legend i{width:11px; height:11px; flex:none; border-radius:1px}
+.legend .k1{background:var(--gold)} .legend .k2{background:var(--teal)}
+.legend .k3{background:var(--plum)} .legend .k4{background:var(--slate)}
+
+/* ---- funnel ---- */
+.funnel{margin-top:26px; display:flex; flex-direction:column}
+.step{
+  background:var(--surface); border:1px solid var(--rule); padding:16px 20px;
+  display:flex; gap:16px; justify-content:space-between; align-items:baseline; flex-wrap:wrap;
+}
+.step .who{font-family:var(--serif); font-size:16.5px; font-weight:600}
+.step .who small{display:block; font-family:var(--sans); font-size:13px; font-weight:400; color:var(--ink-3); margin-top:3px; letter-spacing:0}
+.step .price{font-family:var(--mono); font-size:14px; color:var(--gold); white-space:nowrap; font-variant-numeric:tabular-nums}
+.step.free{border-left:3px solid var(--slate)}
+.step.paid{border-left:3px solid var(--gold)}
+.step.keep{border-left:3px solid var(--teal)}
+.link{
+  align-self:center; display:flex; align-items:center; gap:10px;
+  padding-block:9px; font-family:var(--mono); font-size:11px; color:var(--ink-3); letter-spacing:.08em;
+}
+.link::before{content:"↓"; color:var(--gold); font-size:14px}
+
+/* ---- checklist ---- */
+.days{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin-top:26px}
+.day{background:var(--surface); padding:20px}
+.day .d{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--gold); text-transform:uppercase}
+.day ul{margin:12px 0 0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:9px; font-size:14.5px; line-height:1.6}
+.day li{display:flex; gap:10px}
+.day li::before{content:"□"; color:var(--ink-3); flex:none; font-size:13px; line-height:1.7}
+
+/* ---- rules list ---- */
+.rules{margin-top:24px; display:flex; flex-direction:column; gap:1px; background:var(--rule); border:1px solid var(--rule)}
+.rule-item{background:var(--surface); padding:18px 20px; display:flex; gap:16px; align-items:flex-start}
+.rule-item .k{font-family:var(--mono); font-size:19px; font-weight:600; color:var(--gold); line-height:1.3; flex:none; font-variant-numeric:tabular-nums}
+.rule-item p{font-size:15px}
+.rule-item p span{display:block; color:var(--ink-3); font-size:13.5px; margin-top:4px}
+
+/* ---- persona ---- */
+.persona{
+  margin-top:24px; background:var(--surface); border:1px solid var(--rule);
+  padding:26px 28px; box-shadow:var(--shadow); position:relative;
+}
+.persona::after{
+  content:"XVIII"; position:absolute; right:20px; top:16px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.2em; color:var(--rule-2);
+}
+.persona .tag{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold)}
+.persona .line{font-family:var(--serif); font-size:19px; font-weight:600; margin-top:10px; line-height:1.6}
+.persona .story{margin-top:14px; color:var(--ink-2); font-size:15.5px; max-width:62ch}
+.persona .key{
+  margin-top:20px; padding-top:18px; border-top:1px solid var(--rule);
+  font-family:var(--serif); font-size:17px; line-height:1.7;
+}
+.persona .key b{color:var(--gold-ink)}
+
+/* ---- closing ---- */
+.closing{border-top:2px solid var(--ink); padding-top:40px; margin-top:72px}
+.three{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; margin-top:28px}
+.three > div{border-top:2px solid var(--gold); padding-top:16px}
+.three .n{font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--gold)}
+.three h3{font-size:17.5px; font-weight:600; margin-top:8px}
+.three p{font-size:14.5px; color:var(--ink-2); margin-top:8px}
+.foot{margin-top:48px; padding-top:20px; border-top:1px solid var(--rule); font-family:var(--mono); font-size:11.5px; color:var(--ink-3); line-height:1.9}
+
+:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+@media (max-width:560px){
+  body{font-size:15.5px}
+  .shead{flex-direction:column; gap:4px}
+  .shead .num{padding-top:0}
+  .verdict{padding:22px 20px}
+}
+</style>
+
+<div class="page">
+
+<header class="masthead">
+  <div class="kicker">
+    <span class="arcana">0 — XI</span>
+    <span class="eyebrow">事業設計書 / 2026.09.13</span>
+  </div>
+  <h1>深ひとみ<br>タロット事業 成長設計</h1>
+  <p class="sub">月商2万円から、12ヶ月で月50万円を安定させるまでの商品設計・動線・ペルソナ・実行計画。予算0〜1万円、オーガニック集客のみを前提に組んでいます。</p>
+  <div class="meta">
+    <span>稼働 — 週40時間以上</span>
+    <span>LINE友だち — 100人未満</span>
+    <span>予算 — 月0〜1万円</span>
+    <span>期限 — 12ヶ月</span>
+  </div>
+</header>
+
+<div class="verdict">
+  <h2>診断：問題は商品ではなく、時間の行き先</h2>
+  <p>月160時間使って売上2万円。<strong>時間単価125円</strong>です。この数字が示しているのは商品の弱さではなく、時間の大半が「お金にならない場所」と「6割取られる場所」に流れているという事実です。だから最初の打ち手は新商品ではなく、<strong>時間の流出を止めること</strong>から始めます。</p>
+  <div class="now">
+    <div class="stat">
+      <div class="l">現在の時間単価</div>
+      <div class="v">125<small>円 / 時</small></div>
+    </div>
+    <div class="stat">
+      <div class="l">3ヶ月後</div>
+      <div class="v">625<small>円 / 時</small></div>
+    </div>
+    <div class="stat hero">
+      <div class="l">12ヶ月後</div>
+      <div class="v">3,730<small>円 / 時</small></div>
+    </div>
+  </div>
+</div>
+
+<nav class="toc" aria-label="目次">
+  <ol>
+    <li><span class="n">0</span><a href="#s0">前提と、仮置きした未確認事項</a></li>
+    <li><span class="n">I</span><a href="#s1">3つのボトルネック</a></li>
+    <li><span class="n">II</span><a href="#s2">ジャンルとペルソナ</a></li>
+    <li><span class="n">III</span><a href="#s3">商品ラインナップ</a></li>
+    <li><span class="n">IV</span><a href="#s4">3フェーズの数値設計</a></li>
+    <li><span class="n">V</span><a href="#s5">動線と LINE ステップ配信</a></li>
+    <li><span class="n">VI</span><a href="#s6">最初の90日</a></li>
+    <li><span class="n">VII</span><a href="#s7">毎週金曜に記録する7つ</a></li>
+    <li><span class="n">VIII</span><a href="#s8">判断ルール</a></li>
+    <li><span class="n">IX</span><a href="#s9">リスクと対策</a></li>
+    <li><span class="n">X</span><a href="#s10">今週やる3つ</a></li>
+  </ol>
+</nav>
+
+<section id="s0">
+  <div class="shead"><span class="num">0</span><h2>前提と、仮置きした未確認事項</h2></div>
+  <p class="lede">確認できた4点をもとに設計しました。下の5点は仮置きしています。実際と違う場合は数字が変わるので教えてください。</p>
+  <div class="wide tw">
+    <table>
+      <caption>仮置きした前提</caption>
+      <thead><tr><th>項目</th><th>仮定した内容</th><th>ズレたときの影響</th></tr></thead>
+      <tbody>
+        <tr><td>現在の平均単価</td><td>3,000〜5,000円</td><td>Phase 1 の必要件数が変わる</td></tr>
+        <tr><td>リピート率</td><td>10%未満</td><td>月額会員の到達スピードが変わる</td></tr>
+        <tr><td>得意ジャンル</td><td>恋愛・人間関係</td><td>ペルソナとジャンル設計の前提が変わる</td></tr>
+        <tr><td>顔出し・Zoom／電話</td><td>いずれも可</td><td>不可なら主力を動画・テキスト納品に組み替え</td></tr>
+        <tr><td>開業届</td><td>未提出</td><td>税務・経費計上の段取りが変わる</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="s1">
+  <div class="shead"><span class="num">I</span><h2>3つのボトルネック</h2></div>
+  <div class="body">
+    <h3>① 無料鑑定が「無料で完結」している</h3>
+    <p>Threads の初回無料鑑定は LINE 登録までは機能していますが、有料への橋が架かっていません。無料鑑定の中で悩みが「解決」してしまうと、次を買う理由が消えます。</p>
+    <h3>② ココナラ電話が時間を焼いている</h3>
+    <p>手数料6割は、時間単価を一撃で6割削ります。1時間5,000円の鑑定が実質2,000円。<strong>ここは今月で止める判断が必要です。</strong></p>
+    <h3>③ 自社資産（LINEリスト）が100人未満</h3>
+    <p>フルコミットできる稼働時間があるのに、資産形成に配分されていません。予算ゼロでの勝ち筋は「オーガニックでリストを積む」一本道。だから<strong>リスト数を最優先 KPI に置きます</strong>。</p>
+  </div>
+  <blockquote>
+    <p>売上を上げる前に、時間単価が上がる構造を作る。</p>
+    <p>最初の30日は「ココナラ電話を止める」「無料鑑定に出口を付ける」「リストを月+100人で積む」の3点だけに集中します。</p>
+  </blockquote>
+</section>
+
+<section id="s2">
+  <div class="shead"><span class="num">II</span><h2>ジャンルとペルソナ</h2></div>
+  <p class="lede">「恋愛」に絞る。さらに「進まない関係」に絞る。</p>
+  <div class="body">
+    <p>恋愛全般では競合に埋もれます。推奨サブジャンルは<strong>「答えが出ない関係に決着をつけたい人」</strong>。片思いが半年以上進まない／告白されないまま関係が続いている／音信不通／別れた相手を諦められない。</p>
+    <h3>この絞り方を選ぶ3つの理由</h3>
+    <p><strong>需要量が最大。</strong>占い需要の大半は恋愛・人間関係です。<br>
+    <strong>単価を上げられる。</strong>悩みが深く緊急性が高いので、数千円の相場に縛られません。<br>
+    <strong>リピートが自然に起きる。</strong>状況が動き続けるので「また見てほしい」が発生します。適職や相性は1回で終わってしまいます。</p>
+    <p>なお、不倫・複雑愛は需要も単価も高いジャンルですが、「深ひとみ」を長期ブランドとして使う前提ならメインには置かないことを推奨します（講座展開時に足枷になる）。相談が来たら受ける、という位置づけで十分です。</p>
+  </div>
+  <div class="persona">
+    <div class="tag">メインペルソナ</div>
+    <div class="line">28〜38歳・女性・会社員または専門職・年収300〜500万円</div>
+    <p class="story">好きな人との関係が半年以上進んでいない。または、別れた相手を忘れられない。友人には何度も相談して、もう呆れられている。親には言えない。夜、寝る前にスマホで TikTok ライブや占い動画を見ている。すでに他の占い師に1〜3回は見てもらったことがある。当たったこともあるが、結局状況は変わっていない。</p>
+    <p class="key">この人が買っているのは「答え」ではなく、<b>肯定と伴走</b>です。だから単発鑑定より継続商品が刺さる。これが月50万円到達の設計上の核になります。</p>
+  </div>
+  <div class="persona" style="margin-top:18px">
+    <div class="tag">サブペルソナ（Phase 3 の講座用）</div>
+    <div class="line">30〜45歳・女性・タロット独学中、または講座を受けたが読めていない</div>
+    <p class="story">自分や身近な人を占えるようになりたい。あわよくば副業にしたい。「深ひとみの読み方」を学びたいという指名の動機がすでにある層。</p>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="shead"><span class="num">III</span><h2>商品ラインナップ</h2></div>
+  <p class="lede">無料から月額会員まで、4段の階段を作ります。各段の役割が重複しないことが設計の要点です。</p>
+  <div class="wide tw">
+    <table>
+      <caption>主力4段</caption>
+      <thead><tr><th>段</th><th>商品</th><th class="n">価格</th><th>形式</th><th>役割</th></tr></thead>
+      <tbody>
+        <tr><td>F</td><td>無料1枚引き</td><td class="n">0円</td><td>Threads／ライブ・80字以内</td><td>LINE登録だけが目的。1人3分</td></tr>
+        <tr><td>T</td><td>1問1答タロット</td><td class="n">2,980円</td><td>テキスト納品・24時間以内</td><td>「お金を払う体験」を作る</td></tr>
+        <tr><td>M</td><td>決着セッション</td><td class="n">15,000〜19,800円</td><td>60分＋鑑定書PDF＋7日LINEフォロー</td><td>主力</td></tr>
+        <tr><td>B1</td><td>月いちタロット伴走会員</td><td class="n">月4,980円</td><td>月1回30分＋LINE1枚引き月3回</td><td>50万到達の本体</td></tr>
+        <tr><td>B2</td><td>タロットが読めるようになる講座</td><td class="n">49,800円</td><td>全6回グループ</td><td>Phase 3 から</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="wide tw">
+    <table>
+      <caption>補助収入 — 時間効率が良い順</caption>
+      <thead><tr><th>商品</th><th class="n">価格</th><th class="n">所要</th><th>備考</th></tr></thead>
+      <tbody>
+        <tr><td>動画鑑定納品</td><td class="n">8,800円</td><td class="n">30分</td><td>15分の動画を録って送る。同期不要＝自分のペースで作れる</td></tr>
+        <tr><td>出張占い（イベント）</td><td class="n">30,000〜50,000円</td><td class="n">1日</td><td>カフェ・美容室・マルシェ。実績と対面スキルが同時に積める。即効性あり</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="body">
+    <h3>なぜ決着セッションを15,000円に置けるか</h3>
+    <p>「60分の占い」では相場に引きずられます。売るのは<strong>成果物</strong>です。鑑定書PDF（カードの写真＋読み解き＋次の3週間の行動指針）と、7日間のLINEフォロー。この2つを付けると「60分の会話」ではなく「3週間の伴走」になります。だから15,000円が成立する。<strong>鑑定書テンプレートを最初に作ることが、単価の土台です。</strong></p>
+    <h3>月額会員の設計上の制約</h3>
+    <p>個別対応は40人が限界です。超えたら個別30分を<strong>月1回のZoomグループ鑑定会</strong>に切り替えてください。人数が増えても時間が一定になります。<br>そしてもう一つ重要な原則：<strong>月額会員は新規から取らず、鑑定済みの顧客から引き上げる。</strong>セッションを受けて満足した人にだけ案内します。</p>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="shead"><span class="num">IV</span><h2>3フェーズの数値設計</h2></div>
+  <p class="lede">単発鑑定の積み上げだけでは50万円に届きません。月額会員が主柱に入れ替わることが、このグラフの読みどころです。</p>
+
+  <div class="chart">
+    <div class="axis" aria-hidden="true">
+      <span style="left:0%">0</span>
+      <span style="left:19.23%">10万</span>
+      <span style="left:38.46%">20万</span>
+      <span style="left:57.69%">30万</span>
+      <span style="left:76.92%">40万</span>
+      <span style="left:96.15%">50万円</span>
+    </div>
+    <div class="bars">
+      <div class="barrow">
+        <div class="barhead"><span class="ph">Phase 1<em>1〜3ヶ月目</em></span><span class="tot">98,460円 / 月</span></div>
+        <div class="track">
+          <div class="grid"><i style="left:19.23%"></i><i style="left:38.46%"></i><i style="left:57.69%"></i><i style="left:76.92%"></i><i style="left:96.15%"></i></div>
+          <div class="bar">
+            <div class="seg s1" style="width:11.54%" title="決着セッション 15,000円×4件 = 60,000円"></div>
+            <div class="seg s4" style="width:4.01%" title="1問1答 2,980円×7件 = 20,860円"></div>
+            <div class="seg s4" style="width:3.38%; opacity:.6" title="動画鑑定 8,800円×2件 = 17,600円"></div>
+          </div>
+        </div>
+        <div class="eyebrow">必要LINEリスト 350人 — 月+100人ペース</div>
+      </div>
+      <div class="barrow">
+        <div class="barhead"><span class="ph">Phase 2<em>4〜7ヶ月目</em></span><span class="tot">198,760円 / 月</span></div>
+        <div class="track">
+          <div class="grid"><i style="left:19.23%"></i><i style="left:38.46%"></i><i style="left:57.69%"></i><i style="left:76.92%"></i><i style="left:96.15%"></i></div>
+          <div class="bar">
+            <div class="seg s1" style="width:19.04%" title="決着セッション 19,800円×5件 = 99,000円"></div>
+            <div class="seg s2" style="width:11.49%" title="月額会員 4,980円×12人 = 59,760円"></div>
+            <div class="seg s4" style="width:7.69%" title="トライアル・動画鑑定 = 40,000円"></div>
+          </div>
+        </div>
+        <div class="eyebrow">必要LINEリスト 700〜900人</div>
+      </div>
+      <div class="barrow">
+        <div class="barhead"><span class="ph">Phase 3<em>8〜12ヶ月目</em></span><span class="tot">507,200円 / 月</span></div>
+        <div class="track">
+          <div class="grid"><i style="left:19.23%"></i><i style="left:38.46%"></i><i style="left:57.69%"></i><i style="left:76.92%"></i><i style="left:96.15%"></i></div>
+          <div class="bar">
+            <div class="seg s1" style="width:30.46%" title="決着セッション 19,800円×8件 = 158,400円"></div>
+            <div class="seg s2" style="width:38.31%" title="月額会員 4,980円×40人 = 199,200円"></div>
+            <div class="seg s3" style="width:19.15%" title="講座 49,800円×2名 = 99,600円"></div>
+            <div class="seg s4" style="width:9.62%" title="トライアル・動画・イベント = 50,000円"></div>
+          </div>
+        </div>
+        <div class="eyebrow">必要LINEリスト 1,800〜2,500人</div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="k1"></i>決着セッション</span>
+      <span><i class="k2"></i>月額会員</span>
+      <span><i class="k3"></i>タロット講座</span>
+      <span><i class="k4"></i>トライアル・動画・イベント</span>
+    </div>
+  </div>
+
+  <div class="wide tw">
+    <table>
+      <caption>Phase 3 の時間検証 — 月160時間の枠に収まるか</caption>
+      <thead><tr><th>業務</th><th class="n">月あたり</th></tr></thead>
+      <tbody>
+        <tr><td>決着セッション 8件 × 2.5時間（準備＋60分＋鑑定書）</td><td class="n">20 h</td></tr>
+        <tr><td>月額会員 40人 × 0.7時間</td><td class="n">28 h</td></tr>
+        <tr><td>講座（月4回 × 2時間・グループ開催）</td><td class="n">8 h</td></tr>
+        <tr><td>集客（ライブ週3×1.5h ＋ Threads毎日1h ＋ 無料鑑定）</td><td class="n">60 h</td></tr>
+        <tr><td>事務・制作・振り返り</td><td class="n">20 h</td></tr>
+        <tr class="total"><td>合計 — 稼働枠160時間に対して余白24時間</td><td class="n">136 h</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <blockquote style="margin-top:26px">
+    <p>フェーズ移行は「2ヶ月連続で目標達成」が条件。1ヶ月だけの達成では動かない。</p>
+    <p>1回のまぐれで次の商品開発に手を出すと、既存商品と新商品の両方が中途半端になります。</p>
+  </blockquote>
+</section>
+
+<section id="s5">
+  <div class="shead"><span class="num">V</span><h2>動線と LINE ステップ配信</h2></div>
+  <p class="lede">現状の穴は4つ。無料鑑定に出口がない／ココナラ電話で6割取られる／LINE登録後に何も起きない／鑑定後のリピート案内がない。</p>
+
+  <div class="funnel">
+    <div class="step free">
+      <span class="who">Threads / TikTokライブ<small>無料1枚引き・80字以内・1人3分・1日10人まで</small></span>
+      <span class="price">0円</span>
+    </div>
+    <div class="link">未完了で終わらせる</div>
+    <div class="step free">
+      <span class="who">公式LINE 登録<small>唯一の自社資産。月+100人が最優先KPI</small></span>
+      <span class="price">最優先KPI</span>
+    </div>
+    <div class="link">ステップ配信 7通</div>
+    <div class="step paid">
+      <span class="who">1問1答タロット<small>テキスト納品・24時間以内。初回限定・48時間オファー</small></span>
+      <span class="price">2,980円 — 目標転換率 8%</span>
+    </div>
+    <div class="link">納品時に案内</div>
+    <div class="step paid">
+      <span class="who">決着セッション<small>60分＋鑑定書PDF＋7日間LINEフォロー</small></span>
+      <span class="price">15,000〜19,800円 — 目標 25%</span>
+    </div>
+    <div class="link">7日フォロー終了時に案内</div>
+    <div class="step keep">
+      <span class="who">月額会員 / タロット講座<small>鑑定済みの顧客からのみ引き上げる</small></span>
+      <span class="price">4,980円 / 49,800円 — 目標 30%</span>
+    </div>
+  </div>
+
+  <div class="body">
+    <h3>最重要：無料鑑定の締め方を変える</h3>
+    <p>Threads の回答は、必ずこの型で締めます。</p>
+  </div>
+  <blockquote>
+    <p>「◯◯のカードが出ています。ただ、<b>なぜそうなっているのか</b>まではこの1枚では見えません。そこを深く見たいときは、LINEで受け付けています。」</p>
+  </blockquote>
+  <div class="body">
+    <p>ポイントは<strong>未完了で終わらせること</strong>。「解決」させてしまうと次がなくなります。TikTokライブは週3回・21:00〜22:30で固定して視聴習慣を作り、「個別で深く見たい人はプロフィールのLINEから」を配信中に3回言います。</p>
+  </div>
+
+  <div class="wide tw">
+    <table>
+      <caption>LINEステップ配信 7通 — 自作可・最優先で実装</caption>
+      <thead><tr><th class="n">日</th><th>内容</th><th>目的</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td>登録御礼＋深ひとみの自己紹介（なぜタロットなのか／自分の失敗談）</td><td>人として認識させる</td></tr>
+        <tr><td class="n">2</td><td>タロットで何がわかって、何がわからないか</td><td>期待値調整＝信頼になる</td></tr>
+        <tr><td class="n">3</td><td>「進まない関係」に共通する3つのパターン</td><td>ペルソナに刺す価値提供</td></tr>
+        <tr><td class="n">4</td><td>お客様の変化ストーリー 1本</td><td>証拠</td></tr>
+        <tr><td class="n">5</td><td>よくある質問（怖くないか／当たるとは／料金）</td><td>不安の除去</td></tr>
+        <tr><td class="n">6</td><td>1問1答タロット 2,980円の案内（初回限定・48時間）</td><td>オファー</td></tr>
+        <tr><td class="n">7</td><td>リマインド＋「使わなくても大丈夫です」の一言</td><td>押し売り感の除去</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="body">
+    <h3>ココナラの再定義</h3>
+    <p>電話相談は停止。テキスト鑑定のみ継続（手数料22%）。そして目的を「売上」から<strong>「レビューを100件積むこと」</strong>に変更します。レビュー数は SNS と LP で使える唯一の第三者証明です。規約上ココナラ内から直接LINEへ誘導するのはNGなので、納品物に「深ひとみ」の名前と世界観を残し、<strong>指名検索させる</strong>導線にします。</p>
+    <h3>決済</h3>
+    <p>STORES（手数料3.6%）を継続。月額会員は STORES のサブスクリプション機能を使えば追加コストなしで実装できます。</p>
+  </div>
+</section>
+
+<section id="s6">
+  <div class="shead"><span class="num">VI</span><h2>最初の90日</h2></div>
+  <p class="lede">週次ルーティンを固定してから、30日ごとの成果物を積みます。</p>
+  <div class="wide tw">
+    <table>
+      <caption>週次ルーティン — 曜日で固定する</caption>
+      <thead><tr><th>曜日</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>月・水・金 21:00〜22:30</td><td>TikTokライブ（コメントから1枚引き）</td></tr>
+        <tr><td>火・木 各2時間</td><td>Threads 無料1枚引き対応（1日10人まで）</td></tr>
+        <tr><td>土</td><td>鑑定日 — 決着セッションを集中させる</td></tr>
+        <tr><td>日</td><td>コンテンツ制作・数字の振り返り</td></tr>
+        <tr><td>毎日 朝・夜</td><td>Threads 各1投稿</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="days">
+    <div class="day">
+      <div class="d">〜30日目</div>
+      <ul>
+        <li>ココナラ電話を停止、テキストのみに変更</li>
+        <li>LINEステップ配信 7通を実装</li>
+        <li>1問1答タロット 2,980円を商品化（STORES登録）</li>
+        <li>決着セッションのLP（1枚）を作成</li>
+        <li>鑑定書PDFテンプレートを作成 — 単価の土台なので手を抜かない</li>
+        <li>無料1枚引きの回答テンプレ（80字）を固定</li>
+      </ul>
+    </div>
+    <div class="day">
+      <div class="d">〜60日目</div>
+      <ul>
+        <li>決着セッションの受注開始</li>
+        <li>お客様の声を3件確保（許可を取って掲載）</li>
+        <li>動画鑑定 8,800円を商品化</li>
+      </ul>
+    </div>
+    <div class="day">
+      <div class="d">〜90日目</div>
+      <ul>
+        <li>月10万円を達成</li>
+        <li>月額会員のβ版を既存の鑑定顧客5人に個別案内</li>
+        <li>価格は正規4,980円のまま、特典で「初月の1枚引き無制限」を付ける</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="s7">
+  <div class="shead"><span class="num">VII</span><h2>毎週金曜に記録する7つ</h2></div>
+  <div class="wide tw">
+    <table>
+      <caption>週次KPI</caption>
+      <thead><tr><th class="n">#</th><th>指標</th><th>目標</th><th>なぜ見るか</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td>LINE友だち数（純増）</td><td class="n">+100人 / 月</td><td>唯一の自社資産。最優先KPI</td></tr>
+        <tr><td class="n">2</td><td>Threads無料鑑定 → LINE登録率</td><td class="n">—</td><td>無料鑑定の出口が機能しているか</td></tr>
+        <tr><td class="n">3</td><td>ライブ平均同時視聴 → LINE登録数</td><td class="n">—</td><td>配信1本の価値</td></tr>
+        <tr><td class="n">4</td><td>LINE → トライアル購入率</td><td class="n">8%</td><td>ステップ配信の性能</td></tr>
+        <tr><td class="n">5</td><td>トライアル → セッション引き上げ率</td><td class="n">25%</td><td>商品間の橋の強度</td></tr>
+        <tr><td class="n">6</td><td>セッション → 月額会員・リピート率</td><td class="n">30%</td><td>LTVの源泉</td></tr>
+        <tr class="total"><td class="n">7</td><td>月商 ÷ 稼働時間 ＝ 時間単価</td><td class="n">3,000円+</td><td>これが上がらない施策は捨てる</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="s8">
+  <div class="shead"><span class="num">VIII</span><h2>判断ルール</h2></div>
+  <p class="lede">渡邊さんが「やる／やらない」を迷ったときに立ち返る4行です。</p>
+  <div class="rules">
+    <div class="rule-item"><span class="k">01</span><p>時間単価3,000円を下回る仕事は、3ヶ月以内に廃止する<span>例外は「レビューを積む目的のココナラ テキスト鑑定」だけ</span></p></div>
+    <div class="rule-item"><span class="k">02</span><p>無料鑑定は「1人3分・1日10人」の上限を絶対に守る<span>ここが崩れると事業全体が崩れる。一番破りやすいルール</span></p></div>
+    <div class="rule-item"><span class="k">03</span><p>フェーズ移行は2ヶ月連続達成が条件<span>1ヶ月の達成で次に進むと、既存と新規の両方が中途半端になる</span></p></div>
+    <div class="rule-item"><span class="k">04</span><p>新しい集客チャネルは、既存チャネルのKPIが目標値に届いてから足す<span>TikTok と Threads を回しきる前に Instagram や YouTube に広げない</span></p></div>
+  </div>
+</section>
+
+<section id="s9">
+  <div class="shead"><span class="num">IX</span><h2>リスクと対策</h2></div>
+  <div class="wide tw">
+    <table>
+      <caption>想定リスク</caption>
+      <thead><tr><th>リスク</th><th>対策</th></tr></thead>
+      <tbody>
+        <tr><td>ひとみさん依存（属人性）</td><td>Phase 3 の講座で「教える側」に立たせる。将来的に卒業生を鑑定師として抱える二段目を準備</td></tr>
+        <tr><td>プラットフォーム依存（アルゴリズム変動）</td><td>LINEリストが唯一の自社資産。リスト数を最優先KPIに置いているのはこのため</td></tr>
+        <tr><td>燃え尽き</td><td>月額会員40人が個別対応の限界。超えたらグループ鑑定会に切り替える</td></tr>
+        <tr><td>表現リスク</td><td>「必ず当たる」「治る」等の断定表現を避ける。占いは娯楽・自己理解の枠で提示する</td></tr>
+        <tr><td>開業・税務</td><td>月10万を超える見込みが立った時点で開業届を提出。売上・経費の記録は初月から付ける</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="s10" class="closing">
+  <div class="shead"><span class="num">X</span><h2>今週やる3つ</h2></div>
+  <p class="lede">予算0円、今週中に着手できます。ここが動いてからステップ配信とLPに進んでください。</p>
+  <div class="three">
+    <div>
+      <div class="n">01</div>
+      <h3>ココナラ電話を止める</h3>
+      <p>時間単価を6割削っている元凶。テキスト鑑定だけ残し、レビュー獲得装置として使う。</p>
+    </div>
+    <div>
+      <div class="n">02</div>
+      <h3>無料鑑定の締め方を変える</h3>
+      <p>「解決」で終わらせず「未完了」で終わらせる。80字テンプレを1つ作れば今日から使える。</p>
+    </div>
+    <div>
+      <div class="n">03</div>
+      <h3>鑑定書PDFテンプレを作る</h3>
+      <p>15,000円を正当化する唯一の成果物。これがないと単価は相場に引き戻される。</p>
+    </div>
+  </div>
+  <div class="foot">
+    深ひとみ タロット事業 成長設計 — 2026.09.13<br>
+    数値はヒアリング済みの4条件（週40時間以上・LINE100人未満・12ヶ月・予算0〜1万円）と、セクション0の仮置き前提にもとづく設計値です。実績値ではありません。
+  </div>
+</section>
+
+</div>
